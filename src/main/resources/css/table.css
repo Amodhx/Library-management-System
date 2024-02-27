@@ -31,9 +31,10 @@
     -fx-padding: 0.0em; /* 0 */
 }
 .table-row-cell:selected {
-    -fx-background-color: #005797;
+    -fx-background-color: rgba(178, 173, 173, 1);
     -fx-background-insets: 0;
     -fx-background-radius: 1;
+    -fx-font-weight: bold;
 }
 .table-view > .virtual-flow > .scroll-bar:vertical,
 .table-view > .virtual-flow > .scroll-bar:vertical > .track,
