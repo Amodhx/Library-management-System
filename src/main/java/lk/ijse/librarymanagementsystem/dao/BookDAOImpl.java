@@ -6,21 +6,36 @@ import lk.ijse.librarymanagementsystem.entity.Book;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BookDAOImpl {
     public boolean saveBook(Book book){
         Session session = null;
+        int x = 0 ;
         try {
             session = FactoryConfiguration.getFactoryConfiguration().getSession();
             Transaction transaction = session.beginTransaction();
-            boolean b = (boolean) session.save(book);
+            x = (int) session.save(book);
             transaction.commit();
-            return b;
         }catch (Exception e){
-            new Alert(Alert.AlertType.ERROR,"Cant save book Detail!!").show();
+            new Alert(Alert.AlertType.ERROR,"cant Save book detail!!").show();
         }finally {
             session.close();
-
         }
-        return false;
+        return x > 0 ;
+    }
+    public List<Book> getAllBooks(){
+        Session session = null;
+        List resultList = null;
+        try {
+            session = FactoryConfiguration.getFactoryConfiguration().getSession();
+            resultList = session.createQuery("from Book").getResultList();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR,"Cant load Books").show();
+        }finally {
+            session.close();
+        }
+        return resultList;
     }
 }

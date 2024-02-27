@@ -2,6 +2,8 @@ package lk.ijse.librarymanagementsystem.controller.admin;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +22,7 @@ import lombok.SneakyThrows;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class addBookformController implements Initializable {
@@ -67,19 +70,21 @@ public class addBookformController implements Initializable {
     @SneakyThrows
     @FXML
     void onSaveClick(ActionEvent event) {
-        if (bookService.saveBook(new BookDTO(0,bookTitleField.getText(),
-                authorNamefield.getText(),selectGenreCombo.getValue(),"Available",imagePath))){
+        boolean b = bookService.saveBook(new BookDTO(0, bookTitleField.getText(),
+                authorNamefield.getText(), selectGenreCombo.getValue(), "Available", imagePath));
+        if (b){
             closeUI();
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/admin/books.fxml")));
         }else {
-            new Alert(Alert.AlertType.ERROR,"Cant save book Detail!!").show();
+            new Alert(Alert.AlertType.ERROR,"Cant save book Detail!!!!").show();
              closeUI();
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        ObservableList observableList = FXCollections.observableArrayList("Historical","Novel","Education","Children");
+        selectGenreCombo.setItems(observableList);
     }
 }

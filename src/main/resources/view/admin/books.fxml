@@ -14,7 +14,7 @@
             <Font name="Cambria Bold" size="28.0" />
          </font>
       </Label>
-      <TableView fx:id="table" layoutX="67.0" layoutY="119.0" prefHeight="508.0" prefWidth="999.0">
+      <TableView fx:id="table" layoutX="67.0" layoutY="119.0" prefHeight="508.0" prefWidth="999.0" stylesheets="@../../css/table.css">
         <columns>
           <TableColumn fx:id="idcolumn" prefWidth="86.39999389648438" text="Id" />
           <TableColumn fx:id="titlecolumn" prefWidth="175.19996643066406" text="Title" />

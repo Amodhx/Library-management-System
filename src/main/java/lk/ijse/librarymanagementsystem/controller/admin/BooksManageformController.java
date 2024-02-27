@@ -1,42 +1,55 @@
 package lk.ijse.librarymanagementsystem.controller.admin;
 
+import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.librarymanagementsystem.dto.BookDTO;
+import lk.ijse.librarymanagementsystem.dto.tm.BooksTM;
+import lk.ijse.librarymanagementsystem.service.BookService;
 import lombok.SneakyThrows;
 
-public class BooksManageformController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class BooksManageformController implements Initializable {
     @FXML
     private AnchorPane ancpane;
 
     @FXML
-    private TableColumn<?, ?> authorcolumn;
+    private TableColumn<BooksTM, String> authorcolumn;
 
     @FXML
-    private TableColumn<?, ?> deletecolumn;
+    private TableColumn<BooksTM, JFXButton> deletecolumn;
 
     @FXML
-    private TableColumn<?, ?> genrecolumn;
+    private TableColumn<BooksTM, String> genrecolumn;
 
     @FXML
-    private TableColumn<?, ?> idcolumn;
+    private TableColumn<BooksTM, String> idcolumn;
 
     @FXML
-    private TableColumn<?, ?> statuscolumn;
+    private TableColumn<BooksTM, String> statuscolumn;
 
     @FXML
-    private TableView<?> table;
+    private TableView<BooksTM> table;
 
     @FXML
-    private TableColumn<?, ?> titlecolumn;
+    private TableColumn<BooksTM, String> titlecolumn;
 
     @FXML
-    private TableColumn<?, ?> updatecolumn;
+    private TableColumn<BooksTM, JFXButton> updatecolumn;
+
+    BookService bookService = new BookService();
 
     @SneakyThrows
     @FXML
@@ -48,4 +61,32 @@ public class BooksManageformController {
         stage.show();
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setColumnValues();
+        loadValues();
+    }
+
+    private void loadValues() {
+        ObservableList<BooksTM> observableList = FXCollections.observableArrayList();
+        for (BookDTO b : bookService.getAllBooks()) {
+            observableList.add(new BooksTM(String.valueOf(b.getId()),b.getTitle(),b.getAuthor(),b.getGenre(),b.getStatus(),new JFXButton("Update"),new JFXButton("Delete")));
+        }
+        table.setItems(observableList);
+        for (int i = 0; i < observableList.size(); i++) {
+            observableList.get(i).getUpdate().setStyle("-fx-background-color: rgba(124, 1, 1, 1);-fx-text-fill: White;");
+            observableList.get(i).getDelete().setStyle("-fx-background-color: rgba(0, 40, 118, 1);-fx-text-fill: White;");
+        }
+
+    }
+
+    private void setColumnValues() {
+        idcolumn.setCellValueFactory(new PropertyValueFactory<BooksTM,String>("id"));
+        titlecolumn.setCellValueFactory(new PropertyValueFactory<BooksTM,String>("title"));
+        authorcolumn.setCellValueFactory(new PropertyValueFactory<BooksTM,String>("author"));
+        genrecolumn.setCellValueFactory(new PropertyValueFactory<BooksTM,String>("genre"));
+        statuscolumn.setCellValueFactory(new PropertyValueFactory<BooksTM,String>("status"));
+        updatecolumn.setCellValueFactory(new PropertyValueFactory<BooksTM,JFXButton>("update"));
+        deletecolumn.setCellValueFactory(new PropertyValueFactory<BooksTM,JFXButton>("delete"));
+    }
 }
