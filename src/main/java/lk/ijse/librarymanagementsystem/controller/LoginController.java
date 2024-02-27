@@ -14,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.librarymanagementsystem.dto.AdminDTO;
 import lk.ijse.librarymanagementsystem.dto.UserDTO;
-import lk.ijse.librarymanagementsystem.entity.Admin;
 import lk.ijse.librarymanagementsystem.service.LogginService;
 
 import java.io.IOException;
@@ -75,17 +74,32 @@ public class LoginController implements Initializable {
         for (UserDTO u : loggingService.getAllUsers()){
             if (u.getUsername().equals(usernameFieldText) && u.getPassword().equals(passwordField1Text)){
                 try {
-                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/UserDashboard.fxml"))));
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/user/UserDashboard.fxml"))));
                 } catch (IOException e) {
                     new Alert(Alert.AlertType.ERROR,"Cant load dashboard").show();
                 }
                 stage.setResizable(false);
                 stage.show();
+                closeLogin();
             }
         }
         for (AdminDTO a : loggingService.getAllAdmins()){
-
+            if (a.getUsername().equals(usernameFieldText) && a.getPassword().equals(passwordField1Text)) {
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/admin/adminDashboard.fxml"))));
+                } catch (IOException e) {
+                    new Alert(Alert.AlertType.ERROR, "Cant load dashboard").show();
+                }
+                stage.setResizable(false);
+                stage.show();
+                closeLogin();
+            }
         }
+    }
+
+    private void closeLogin() {
+        Stage stage  = (Stage) logginBtn.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
