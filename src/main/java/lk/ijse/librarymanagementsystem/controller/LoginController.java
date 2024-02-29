@@ -76,14 +76,16 @@ public class LoginController implements Initializable {
                 try {
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/user/UserDashboard.fxml"))));
                 } catch (IOException e) {
-                    new Alert(Alert.AlertType.ERROR,"Cant load dashboard").show();
+                   e.printStackTrace();
+                    // new Alert(Alert.AlertType.ERROR,"Cant load dashboard").show();
                 }
                 stage.setResizable(false);
                 stage.show();
                 closeLogin();
             }
         }
-        for (AdminDTO a : loggingService.getAllAdmins()){
+        if (!stage.isShowing()){
+        for (AdminDTO a : loggingService.getAllAdmins()) {
             if (a.getUsername().equals(usernameFieldText) && a.getPassword().equals(passwordField1Text)) {
                 try {
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/admin/adminDashboard.fxml"))));
@@ -94,6 +96,7 @@ public class LoginController implements Initializable {
                 stage.show();
                 closeLogin();
             }
+        }
         }
     }
 
