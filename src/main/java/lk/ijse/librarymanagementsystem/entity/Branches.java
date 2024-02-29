@@ -18,5 +18,7 @@ public class Branches {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String city ;
+    private String city;
+    private String address;
+    private String postalCode;
 }
