@@ -5,13 +5,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lk.ijse.librarymanagementsystem.dto.ShopDTO;
 import lk.ijse.librarymanagementsystem.dto.tm.ShopsTM;
 import lk.ijse.librarymanagementsystem.service.ShopService;
+import lombok.SneakyThrows;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -43,10 +48,19 @@ public class ShopsformController implements Initializable {
     @FXML
     private TableColumn<ShopsTM, JFXButton> updatecolumn;
 
+    @FXML
+    private AnchorPane pane;
+
     ShopService service = new ShopService();
 
+    @SneakyThrows
     @FXML
     void onAddBookClick(ActionEvent event) {
+        Stage stage = new Stage();
+        addShopformController.anchorPane = pane;
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/admin/addshop.fxml"))));
+        stage.setResizable(false);
+        stage.show();
 
     }
 
@@ -63,6 +77,10 @@ public class ShopsformController implements Initializable {
             observableList.add(new ShopsTM(String.valueOf(s.getId()),s.getName(),s.getCity(),s.getAddress(),s.getPostalCode(),new JFXButton("Update"),new JFXButton("Delete")));
         }
         table.setItems(observableList);
+        for (int i = 0; i < observableList.size(); i++) {
+            observableList.get(i).getUpdate().setStyle("-fx-background-color: rgba(124, 1, 1, 1);-fx-text-fill: White;");
+            observableList.get(i).getDelete().setStyle("-fx-background-color: rgba(0, 40, 118, 1);-fx-text-fill: White;");
+        }
     }
 
     private void setColumns() {

@@ -18,4 +18,7 @@ public class ShopService {
         }
         return arrayList;
     }
+    public boolean saveShop(ShopDTO shopDTO){
+        return shopDAO.saveShop(new Branches(shopDTO.getId(), shopDTO.getName(), shopDTO.getCity(), shopDTO.getAddress(), shopDTO.getPostalCode()));
+    }
 }

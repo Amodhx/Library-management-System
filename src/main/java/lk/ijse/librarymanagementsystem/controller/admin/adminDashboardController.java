@@ -55,6 +55,7 @@ public class adminDashboardController implements Initializable {
     @FXML
     void onShopManageClick(ActionEvent event) {
         setPaneColor(shopPane);
+        setDashBoard("/view/admin/shops.fxml");
     }
 
     @FXML
