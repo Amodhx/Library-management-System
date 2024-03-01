@@ -48,7 +48,7 @@ public class BookOBJformController implements Initializable {
         LocalDate localDate = now.plusDays(10);
         String dueDate = String.valueOf(localDate);
         boolean b = bookService.updateBookStatus(id, status);
-        boolean b1 = borrowingDetailsService.saveBorrowingDetails(new BorrowingDetailDTO(0, bdate, dueDate, userID, id));
+        boolean b1 = borrowingDetailsService.saveBorrowingDetails(new BorrowingDetailDTO(0, bdate, dueDate,"Not Returned", userID, id));
         if (b1){
             new Alert(Alert.AlertType.INFORMATION,"Book booked!!").show();
         }

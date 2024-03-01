@@ -36,4 +36,12 @@ public class BookService {
         }
         return arrayList;
     }
+
+    public boolean deleteBook(String id) {
+        return bookDAO.deleteBook(id);
+    }
+
+    public boolean updateBook(BookDTO bookDTO) {
+        return bookDAO.Update(new Book(bookDTO.getId(),bookDTO.getTitle(),bookDTO.getAuthor(),bookDTO.getGenre(),bookDTO.getStatus(),bookDTO.getUrl()));
+    }
 }
