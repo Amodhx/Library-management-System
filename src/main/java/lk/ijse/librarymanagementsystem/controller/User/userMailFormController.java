@@ -31,22 +31,29 @@ public class userMailFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        combo.setValue("");
         setGripPane(bookService.getAllBooks());
         comboSetItem();
 
     }
 
     private void comboSetItem() {
-        ObservableList observableList = FXCollections.observableArrayList("Historical","Novel","Education","Children");
+        ObservableList observableList = FXCollections.observableArrayList("All","Historical","Novel","Education","Children");
         combo.setItems(observableList);
     }
 
     @FXML
     void selectinggenreCombo(ActionEvent event) {
-
+        String value = combo.getValue();
+        if (value.equals("All")){
+            setGripPane(bookService.getAllBooks());
+        }else {
+            setGripPane(bookService.getBooksFilterWithGenre(value));
+        }
     }
 
     private void setGripPane(ArrayList<BookDTO> allBooks) {
+        gridpane.getChildren().clear();
         int colomn = 0;
         int row = 0;
         for (int i = 0; i < allBooks.size(); i++) {

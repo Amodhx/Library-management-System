@@ -31,7 +31,7 @@
       </AnchorPane>
       <AnchorPane fx:id="ancpane" layoutX="201.0" layoutY="-1.0" prefHeight="724.0" prefWidth="1132.0">
       </AnchorPane>
-      <JFXButton layoutX="1.0" layoutY="222.0" onAction="#ontransactionManageClick" prefHeight="34.0" prefWidth="155.0" styleClass="btn" stylesheets="@../../css/pane.css" text="Books">
+      <JFXButton layoutX="1.0" layoutY="222.0" onAction="#onBookManageCLick" prefHeight="34.0" prefWidth="155.0" styleClass="btn" stylesheets="@../../css/pane.css" text="Books">
          <font>
             <Font name="Cambria Bold" size="14.0" />
          </font>
@@ -45,7 +45,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <JFXButton layoutY="265.0" onAction="#onBookManageCLick" prefHeight="34.0" prefWidth="155.0" styleClass="btn" stylesheets="@../../css/pane.css" text="           Transaction">
+      <JFXButton layoutY="265.0" onAction="#ontransactionManageClick" prefHeight="34.0" prefWidth="155.0" styleClass="btn" stylesheets="@../../css/pane.css" text="           Transaction">
          <font>
             <Font name="Cambria Bold" size="14.0" />
          </font>

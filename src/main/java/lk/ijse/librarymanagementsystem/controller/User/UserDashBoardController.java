@@ -25,10 +25,13 @@ public class UserDashBoardController implements Initializable {
 
     @FXML
     void onBookManageCLick(ActionEvent event) {
-
+        btnCLR(booksPane);
+        navigateUI("/view/user/userMainform.fxml");
     }
     @FXML
     void ontransactionManageClick(ActionEvent event) {
+        btnCLR(transactionpane);
+        navigateUI("/view/user/transactionform.fxml");
 
     }
 
