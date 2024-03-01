@@ -14,6 +14,9 @@ public class LogginService {
 
     UserDAOImpl userDAO = new UserDAOImpl();
     AdminDAOImpl adminDAO = new AdminDAOImpl();
+    public User getUserById(int id){
+        return userDAO.getUserByID(id);
+    }
 
     public ArrayList<UserDTO> getAllUsers(){
         ArrayList<UserDTO> arrayList = new ArrayList<>();
