@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.librarymanagementsystem.controller.User.BookOBJformController;
+import lk.ijse.librarymanagementsystem.controller.User.transactionManageformController;
 import lk.ijse.librarymanagementsystem.dto.AdminDTO;
 import lk.ijse.librarymanagementsystem.dto.UserDTO;
 import lk.ijse.librarymanagementsystem.service.LogginService;
@@ -74,6 +76,8 @@ public class LoginController implements Initializable {
         for (UserDTO u : loggingService.getAllUsers()){
             if (u.getUsername().equals(usernameFieldText) && u.getPassword().equals(passwordField1Text)){
                 try {
+                    BookOBJformController.userID = u.getId();
+                    transactionManageformController.id = u.getId();
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/user/UserDashboard.fxml"))));
                 } catch (IOException e) {
                    e.printStackTrace();
