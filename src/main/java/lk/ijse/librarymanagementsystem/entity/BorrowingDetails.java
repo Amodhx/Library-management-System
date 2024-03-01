@@ -15,10 +15,9 @@ public class BorrowingDetails {
     private  int id;
     private String borrowingDate;
     private String dueDate;
-
-    @OneToOne(fetch = FetchType.EAGER)
-    private User user;
-
-    @OneToOne(fetch = FetchType.EAGER)
+   @ManyToOne
+    private User User;
+    @ManyToOne
     private Book book;
+
 }
