@@ -11,6 +11,7 @@ public class BorrowingDetailDTO {
     private int id;
     private String borrowingDate;
     private String dueDate;
+    private String status;
     private int UserID;
     private int BookID;
 }

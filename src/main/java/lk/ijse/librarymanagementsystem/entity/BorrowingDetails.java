@@ -15,9 +15,10 @@ public class BorrowingDetails {
     private  int id;
     private String borrowingDate;
     private String dueDate;
-   @ManyToOne
+    private String status;
+   @ManyToOne(cascade = CascadeType.ALL)
     private User User;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Book book;
 
 }

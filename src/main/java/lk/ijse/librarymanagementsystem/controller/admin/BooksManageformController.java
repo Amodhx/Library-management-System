@@ -18,6 +18,7 @@ import lk.ijse.librarymanagementsystem.dto.tm.BooksTM;
 import lk.ijse.librarymanagementsystem.service.BookService;
 import lombok.SneakyThrows;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -74,8 +75,37 @@ public class BooksManageformController implements Initializable {
         }
         table.setItems(observableList);
         for (int i = 0; i < observableList.size(); i++) {
+            String id = observableList.get(i).getId();
             observableList.get(i).getUpdate().setStyle("-fx-background-color: rgba(124, 1, 1, 1);-fx-text-fill: White;");
             observableList.get(i).getDelete().setStyle("-fx-background-color: rgba(0, 40, 118, 1);-fx-text-fill: White;");
+            observableList.get(i).getDelete().setOnAction(event -> {
+                boolean b = bookService.deleteBook(id);
+                ancpane.getChildren().clear();
+                try {
+                    ancpane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/admin/books.fxml")));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            String id1 = observableList.get(i).getId();
+            String title = observableList.get(i).getTitle();
+            String author = observableList.get(i).getAuthor();
+            String genre = observableList.get(i).getGenre();
+            String status = observableList.get(i).getStatus();
+            observableList.get(i).getUpdate().setOnAction(event -> {
+                Stage stage = new Stage();
+                UpdateBookFormController.bid = Integer.parseInt(id1);
+                UpdateBookFormController.booktitle = title;
+                UpdateBookFormController.author = author;
+                UpdateBookFormController.genrer = genre;
+                try {
+                    stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/admin/UpdateBook.fxml"))));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                stage.setResizable(false);
+                stage.show();
+            });
         }
 
     }

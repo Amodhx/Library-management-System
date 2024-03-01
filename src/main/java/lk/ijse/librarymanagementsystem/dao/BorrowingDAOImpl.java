@@ -7,7 +7,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class BorrowingDAOImpl {
     public boolean saveBorrowingDetail(BorrowingDetails borrowingDetails){
@@ -19,7 +21,7 @@ public class BorrowingDAOImpl {
             x = (int) session.save(borrowingDetails);
             transaction.commit();
         }catch (Exception e){
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,"cant reservate book!!").show();
         }finally {
             session.close();
         }
@@ -40,5 +42,44 @@ public class BorrowingDAOImpl {
             session.close();
         }
         return list;
+    }
+
+    public boolean updateDueDate(int id) {
+        Session session = null;
+        int x = 0 ;
+        try {
+            session = FactoryConfiguration.getFactoryConfiguration().getSession();
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("UPDATE BorrowingDetails b set dueDate = :Date where id = :ID");
+            query.setParameter("Date",String.valueOf(LocalDate.now()));
+            query.setParameter("ID",id);
+            x = query.executeUpdate();
+            transaction.commit();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR).show();
+        }finally {
+            session.close();
+        }
+        return x > 0 ;
+
+    }
+
+    public boolean updateStatus(int id) {
+        Session session = null;
+        int x = 0 ;
+        try {
+            session = FactoryConfiguration.getFactoryConfiguration().getSession();
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("update BorrowingDetails b set status = :Status where id = :ID");
+            query.setParameter("Status","Returned");
+            query.setParameter("ID",id);
+            x = query.executeUpdate();
+            transaction.commit();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR).show();
+        }finally {
+            session.close();
+        }
+        return x > 0 ;
     }
 }
