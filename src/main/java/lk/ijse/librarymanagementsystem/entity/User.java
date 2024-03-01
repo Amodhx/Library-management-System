@@ -1,14 +1,13 @@
 package lk.ijse.librarymanagementsystem.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.annotations.DynamicUpdate;
+
+import java.util.ArrayList;
 
 @Entity
 @AllArgsConstructor
@@ -23,5 +22,6 @@ public class User {
     private String username;
     private String password;
     private String email;
+
 
 }
