@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="724.0" prefWidth="1132.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.librarymanagementsystem.controller.User.transactionManageformController">
    <children>
       <Label layoutX="79.0" layoutY="24.0" text="Transaction">
@@ -18,11 +17,12 @@
       <TableView fx:id="table" layoutX="79.0" layoutY="118.0" prefHeight="526.0" prefWidth="971.0" stylesheets="@../../css/table.css">
         <columns>
           <TableColumn fx:id="transIdField" prefWidth="121.60000610351562" text="T_ID" />
-          <TableColumn fx:id="userIdField" prefWidth="160.79998779296875" text="User_id" />
-            <TableColumn fx:id="bookIDField" prefWidth="180.79998779296875" text="Book_ID" />
-            <TableColumn fx:id="bookTitleFIeld" prefWidth="238.40008544921875" text="Book_Title" />
-            <TableColumn fx:id="getDatefield" prefWidth="124.0" text="Get Date" />
-            <TableColumn fx:id="dueDatefield" prefWidth="150.4000244140625" text="Due Date" />
+          <TableColumn fx:id="userIdField" prefWidth="110.39994812011719" text="User_id" />
+            <TableColumn fx:id="bookIDField" prefWidth="135.20001220703125" text="Book_ID" />
+            <TableColumn fx:id="bookTitleFIeld" prefWidth="209.5999755859375" text="Book_Title" />
+            <TableColumn fx:id="getDatefield" prefWidth="156.00006103515625" text="Get Date" />
+            <TableColumn fx:id="dueDatefield" prefWidth="127.99993896484375" text="Due Date" />
+            <TableColumn fx:id="returncolumn" prefWidth="106.4000244140625" />
         </columns>
       </TableView>
       <JFXButton layoutX="878.0" layoutY="72.0" onAction="#transHistoryButton" prefHeight="31.0" prefWidth="171.0" style="-fx-background-color: rgba(71, 69, 69, 1); -fx-background-radius: 8;" text="Transaction History" textFill="WHITE">
