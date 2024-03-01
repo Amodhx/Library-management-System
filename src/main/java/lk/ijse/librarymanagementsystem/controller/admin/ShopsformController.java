@@ -18,6 +18,7 @@ import lk.ijse.librarymanagementsystem.dto.tm.ShopsTM;
 import lk.ijse.librarymanagementsystem.service.ShopService;
 import lombok.SneakyThrows;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -78,8 +79,18 @@ public class ShopsformController implements Initializable {
         }
         table.setItems(observableList);
         for (int i = 0; i < observableList.size(); i++) {
+            int id = Integer.parseInt(observableList.get(i).getId());
             observableList.get(i).getUpdate().setStyle("-fx-background-color: rgba(124, 1, 1, 1);-fx-text-fill: White;");
             observableList.get(i).getDelete().setStyle("-fx-background-color: rgba(0, 40, 118, 1);-fx-text-fill: White;");
+            observableList.get(i).getDelete().setOnAction(event -> {
+                boolean b = service.deleteShop(id);
+                pane.getChildren().clear();
+                try {
+                    pane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/admin/shops.fxml")));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 

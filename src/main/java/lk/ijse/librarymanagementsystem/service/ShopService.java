@@ -10,6 +10,9 @@ import java.util.List;
 public class ShopService {
 
     ShopDAOImpl shopDAO = new ShopDAOImpl();
+    public boolean deleteShop(int id){
+        return shopDAO.deleteShop(id);
+    }
     public ArrayList<ShopDTO> getAllShops(){
         List<Branches> allShops = shopDAO.getAllShops();
         ArrayList<ShopDTO> arrayList = new ArrayList<>();
