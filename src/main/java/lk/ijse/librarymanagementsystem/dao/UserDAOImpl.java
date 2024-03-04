@@ -30,15 +30,14 @@ public class UserDAOImpl {
     }
     public List<User> getAllUser(){
         Session session = null;
-        List<User> resultList = null;
         try {
-             session = FactoryConfiguration.getFactoryConfiguration().getSession();
-            resultList = session.createQuery("from User ").getResultList();
+            session = FactoryConfiguration.getFactoryConfiguration().getSession();
+            return session.createQuery("from User ").getResultList();
         }catch (Exception e){
             new Alert(Alert.AlertType.ERROR,"Cant load Users").show();
         }finally {
             session.close();
-            return resultList;
         }
+        return null;
     }
 }
