@@ -20,7 +20,8 @@ public class LogginService {
 
     public ArrayList<UserDTO> getAllUsers(){
         ArrayList<UserDTO> arrayList = new ArrayList<>();
-        for (User u : userDAO.getAllUser()){
+        List<User> allUser = userDAO.getAllUser();
+        for (User u : allUser){
             arrayList.add(new UserDTO(u.getId(),u.getUsername(),u.getPassword(),u.getEmail()));
         }
         return arrayList;
