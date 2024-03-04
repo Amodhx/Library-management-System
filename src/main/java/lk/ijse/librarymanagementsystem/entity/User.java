@@ -8,6 +8,7 @@ import lombok.NonNull;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -22,6 +23,8 @@ public class User {
     private String username;
     private String password;
     private String email;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "User")
+    private List<BorrowingDetails> borrowingDetails;
 
 
 }
