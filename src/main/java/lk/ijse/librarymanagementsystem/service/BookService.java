@@ -18,7 +18,7 @@ public class BookService {
     }
     public boolean saveBook(BookDTO bookDTO){
         return bookDAO.saveBook(new Book(bookDTO.getId(), bookDTO.getTitle(), bookDTO.getAuthor(),
-                bookDTO.getGenre(), bookDTO.getStatus(), bookDTO.getUrl()));
+                bookDTO.getGenre(), bookDTO.getStatus(), bookDTO.getUrl(),new ArrayList<>()));
     }
     public ArrayList<BookDTO> getAllBooks(){
         List<Book> allBooks = bookDAO.getAllBooks();
@@ -42,6 +42,6 @@ public class BookService {
     }
 
     public boolean updateBook(BookDTO bookDTO) {
-        return bookDAO.Update(new Book(bookDTO.getId(),bookDTO.getTitle(),bookDTO.getAuthor(),bookDTO.getGenre(),bookDTO.getStatus(),bookDTO.getUrl()));
+        return bookDAO.Update(new Book(bookDTO.getId(),bookDTO.getTitle(),bookDTO.getAuthor(),bookDTO.getGenre(),bookDTO.getStatus(),bookDTO.getUrl(),new ArrayList<>()));
     }
 }
