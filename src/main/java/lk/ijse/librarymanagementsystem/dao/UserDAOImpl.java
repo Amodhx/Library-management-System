@@ -57,4 +57,21 @@ public class UserDAOImpl {
         }
         return x > 0;
     }
+
+    public boolean updateUser(User user) {
+        Session session = null;
+        int x = 0 ;
+        try {
+            session = FactoryConfiguration.getFactoryConfiguration().getSession();
+            Transaction transaction = session.beginTransaction();
+            session.update(user);
+            x = 1 ;
+            transaction.commit();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR,"Cant update User").show();
+        }finally {
+            session.close();
+        }
+        return x > 0 ;
+    }
 }
