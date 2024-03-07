@@ -33,4 +33,10 @@ public class LogginService {
         }
         return arrayList;
     }
+    public boolean saveAdmin(AdminDTO adminDTO){
+        return adminDAO.saveAdmin(new Admin(adminDTO.getId(),adminDTO.getUsername(),adminDTO.getPassword(),adminDTO.getEmail()));
+    }
+    public boolean saveUser(UserDTO userDTO){
+        return userDAO.saveUser(new User(userDTO.getId(),userDTO.getUsername(),userDTO.getPassword(),userDTO.getEmail(),new ArrayList<>()));
+    }
 }

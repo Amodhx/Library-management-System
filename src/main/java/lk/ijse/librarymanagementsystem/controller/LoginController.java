@@ -12,11 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import lk.ijse.librarymanagementsystem.controller.User.BookOBJformController;
 import lk.ijse.librarymanagementsystem.controller.User.transactionManageformController;
+import lk.ijse.librarymanagementsystem.controller.admin.AddAdminformController;
 import lk.ijse.librarymanagementsystem.dto.AdminDTO;
 import lk.ijse.librarymanagementsystem.dto.UserDTO;
 import lk.ijse.librarymanagementsystem.service.LogginService;
+import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
@@ -109,9 +112,15 @@ public class LoginController implements Initializable {
         stage.close();
     }
 
+
+    @SneakyThrows
     @FXML
     void onSignUpClick(MouseEvent event) {
-
+        Stage stage = new Stage();
+        AddAdminformController.type = "u";
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/admin/AddAdmin.fxml"))));
+        stage.setResizable(false);
+        stage.show();
     }
 
     @Override
