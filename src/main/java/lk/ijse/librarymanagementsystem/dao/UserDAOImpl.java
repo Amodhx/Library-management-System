@@ -4,6 +4,7 @@ import javafx.scene.control.Alert;
 import lk.ijse.librarymanagementsystem.config.FactoryConfiguration;
 import lk.ijse.librarymanagementsystem.entity.User;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -39,5 +40,21 @@ public class UserDAOImpl {
             session.close();
         }
         return null;
+    }
+
+    public boolean saveUser(User user) {
+        Session session = null;
+        int x = 0 ;
+        try {
+            session = FactoryConfiguration.getFactoryConfiguration().getSession();
+            Transaction transaction = session.beginTransaction();
+            x = (int) session.save(user);
+            transaction.commit();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR ,  "Cant save User now").show();
+        }finally {
+            session.close();
+        }
+        return x > 0;
     }
 }
