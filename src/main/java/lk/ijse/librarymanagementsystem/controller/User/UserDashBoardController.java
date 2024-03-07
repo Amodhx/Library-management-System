@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.librarymanagementsystem.controller.passwordCHangeController;
 import lombok.SneakyThrows;
 
 import java.net.URL;
@@ -22,6 +23,15 @@ public class UserDashBoardController implements Initializable {
 
     @FXML
     private AnchorPane transactionpane;
+    @SneakyThrows
+    @FXML
+    void onpasswordCHangeCLick(ActionEvent event) {
+        Stage stage = new Stage();
+        passwordCHangeController.type = "u";
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/passwordChange.fxml"))));
+        stage.setResizable(false);
+        stage.show();
+    }
 
     @FXML
     void onBookManageCLick(ActionEvent event) {
