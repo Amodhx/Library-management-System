@@ -23,9 +23,13 @@ public class SettingformController {
         stage.show();
     }
 
+    @SneakyThrows
     @FXML
     void changeAccpasswordbtnClick(ActionEvent event) {
-
+        Stage stage = new Stage();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/passwordChange.fxml"))));
+        stage.setResizable(false);
+        stage.show();
     }
 
     @SneakyThrows

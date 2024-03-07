@@ -80,11 +80,12 @@ public class LoginController implements Initializable {
             if (u.getUsername().equals(usernameFieldText) && u.getPassword().equals(passwordField1Text)){
                 try {
                     BookOBJformController.userID = u.getId();
+                    passwordCHangeController.user = u;
+                    passwordCHangeController.type = "u";
                     transactionManageformController.id = u.getId();
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/user/UserDashboard.fxml"))));
                 } catch (IOException e) {
-                   e.printStackTrace();
-                    // new Alert(Alert.AlertType.ERROR,"Cant load dashboard").show();
+                     new Alert(Alert.AlertType.ERROR,"Cant load dashboard").show();
                 }
                 stage.setResizable(false);
                 stage.show();
@@ -95,6 +96,8 @@ public class LoginController implements Initializable {
         for (AdminDTO a : loggingService.getAllAdmins()) {
             if (a.getUsername().equals(usernameFieldText) && a.getPassword().equals(passwordField1Text)) {
                 try {
+                    passwordCHangeController.admin = a;
+                    passwordCHangeController.type = "a";
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/admin/adminDashboard.fxml"))));
                 } catch (IOException e) {
                     new Alert(Alert.AlertType.ERROR, "Cant load dashboard").show();
