@@ -39,4 +39,11 @@ public class LogginService {
     public boolean saveUser(UserDTO userDTO){
         return userDAO.saveUser(new User(userDTO.getId(),userDTO.getUsername(),userDTO.getPassword(),userDTO.getEmail(),new ArrayList<>()));
     }
+    public boolean updateAdmin(AdminDTO adminDTO){
+        return adminDAO.updateAdmin(new Admin(adminDTO.getId(),adminDTO.getUsername(),adminDTO.getPassword(),adminDTO.getEmail()));
+    }
+    public boolean updateUser(UserDTO userDTO){
+        return userDAO.updateUser(new User(userDTO.getId(),userDTO.getUsername(), userDTO.getPassword(), userDTO.getEmail(),new ArrayList<>()));
+
+    }
 }
