@@ -27,6 +27,11 @@
                   <Font name="Cambria Bold" size="14.0" />
                </font>
             </JFXButton>
+            <JFXButton layoutY="313.0" onAction="#onpasswordCHangeCLick" prefHeight="34.0" prefWidth="155.0" styleClass="btn" stylesheets="@../../css/pane.css" text="       Password">
+               <font>
+                  <Font name="Cambria Bold" size="14.0" />
+               </font>
+            </JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="ancpane" layoutX="201.0" layoutY="-1.0" prefHeight="724.0" prefWidth="1132.0">
