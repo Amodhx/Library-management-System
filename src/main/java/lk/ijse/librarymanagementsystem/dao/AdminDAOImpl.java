@@ -24,6 +24,22 @@ public class AdminDAOImpl {
         }
     }
 
+    public boolean updateAdmin(Admin admin){
+        Session session = null;
+        int x = 0 ;
+        try {
+            session = FactoryConfiguration.getFactoryConfiguration().getSession();
+            Transaction transaction = session.beginTransaction();
+            session.update(admin);
+            transaction.commit();
+            x = 1;
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR,"Cant Update password now").show();
+        }finally {
+            session.close();
+        }
+        return x > 0 ;
+    }
     public boolean saveAdmin(Admin admin) {
         Session session = null;
         int x = 0;
