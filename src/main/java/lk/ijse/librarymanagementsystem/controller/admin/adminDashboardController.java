@@ -50,6 +50,7 @@ public class adminDashboardController implements Initializable {
     @FXML
     void onSettingsClick(ActionEvent event) {
         setPaneColor(settingPane);
+        setDashBoard("/view/admin/settingform.fxml");
     }
 
     @FXML
