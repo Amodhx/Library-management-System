@@ -1,7 +1,8 @@
-package lk.ijse.librarymanagementsystem.dao;
+package lk.ijse.librarymanagementsystem.dao.impl;
 
 import javafx.scene.control.Alert;
 import lk.ijse.librarymanagementsystem.config.FactoryConfiguration;
+import lk.ijse.librarymanagementsystem.dao.UserDAO;
 import lk.ijse.librarymanagementsystem.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,7 +10,9 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class UserDAOImpl {
+public class UserDAOImpl implements UserDAO {
+
+    @Override
     public User getUserByID(int id){
         Session session = null;
         User user = new User();
@@ -29,7 +32,9 @@ public class UserDAOImpl {
         }
         return user;
     }
-    public List<User> getAllUser(){
+
+    @Override
+    public List<User> getAll(){
         Session session = null;
         try {
             session = FactoryConfiguration.getFactoryConfiguration().getSession();
@@ -42,7 +47,8 @@ public class UserDAOImpl {
         return null;
     }
 
-    public boolean saveUser(User user) {
+    @Override
+    public boolean saveAll(User user) {
         Session session = null;
         int x = 0 ;
         try {
@@ -58,6 +64,7 @@ public class UserDAOImpl {
         return x > 0;
     }
 
+    @Override
     public boolean updateUser(User user) {
         Session session = null;
         int x = 0 ;
