@@ -1,7 +1,8 @@
-package lk.ijse.librarymanagementsystem.dao;
+package lk.ijse.librarymanagementsystem.dao.impl;
 
 import javafx.scene.control.Alert;
 import lk.ijse.librarymanagementsystem.config.FactoryConfiguration;
+import lk.ijse.librarymanagementsystem.dao.BorrowingDAO;
 import lk.ijse.librarymanagementsystem.entity.BorrowingDetails;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,8 +12,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class BorrowingDAOImpl {
-    public boolean saveBorrowingDetail(BorrowingDetails borrowingDetails){
+public class BorrowingDAOImpl implements BorrowingDAO {
+
+    @Override
+    public boolean saveAll(BorrowingDetails borrowingDetails){
         Session session = null;
         int x = 0 ;
         try {
@@ -28,6 +31,12 @@ public class BorrowingDAOImpl {
         return x > 0 ;
     }
 
+    @Override
+    public List<BorrowingDetails> getAll() {
+        return null;
+    }
+
+    @Override
     public List<BorrowingDetails> getDetailsBYid(int id) {
         Session session = null;
         List<BorrowingDetails> list = null;
@@ -44,6 +53,7 @@ public class BorrowingDAOImpl {
         return list;
     }
 
+    @Override
     public boolean updateDueDate(int id) {
         Session session = null;
         int x = 0 ;
@@ -64,6 +74,7 @@ public class BorrowingDAOImpl {
 
     }
 
+    @Override
     public boolean updateStatus(int id) {
         Session session = null;
         int x = 0 ;
