@@ -15,11 +15,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.librarymanagementsystem.dto.ShopDTO;
 import lk.ijse.librarymanagementsystem.dto.tm.ShopsTM;
-import lk.ijse.librarymanagementsystem.service.ShopService;
+import lk.ijse.librarymanagementsystem.service.ServiceFactory;
+import lk.ijse.librarymanagementsystem.service.impl.ShopServiceImpl;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.Provider;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -52,7 +54,7 @@ public class ShopsformController implements Initializable {
     @FXML
     private AnchorPane pane;
 
-    ShopService service = new ShopService();
+    ShopServiceImpl service = (ShopServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.SHOPService);
 
     @SneakyThrows
     @FXML

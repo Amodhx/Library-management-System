@@ -12,13 +12,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import lk.ijse.librarymanagementsystem.controller.User.BookOBJformController;
 import lk.ijse.librarymanagementsystem.controller.User.transactionManageformController;
 import lk.ijse.librarymanagementsystem.controller.admin.AddAdminformController;
 import lk.ijse.librarymanagementsystem.dto.AdminDTO;
 import lk.ijse.librarymanagementsystem.dto.UserDTO;
-import lk.ijse.librarymanagementsystem.service.LogginService;
+import lk.ijse.librarymanagementsystem.service.ServiceFactory;
+import lk.ijse.librarymanagementsystem.service.impl.LogginServiceImpl;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class LoginController implements Initializable {
     PasswordField passwordField1 ;
     TextField textField;
 
-    LogginService loggingService = new LogginService();
+    LogginServiceImpl loggingService = (LogginServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.LOGGINService);
 
     @FXML
     void onEyeMouseEntered(MouseEvent event) {

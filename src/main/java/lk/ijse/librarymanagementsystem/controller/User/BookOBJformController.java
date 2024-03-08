@@ -6,12 +6,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import lk.ijse.librarymanagementsystem.dto.BookDTO;
 import lk.ijse.librarymanagementsystem.dto.BorrowingDetailDTO;
-import lk.ijse.librarymanagementsystem.service.BookService;
-import lk.ijse.librarymanagementsystem.service.BorrowingDetailsService;
+import lk.ijse.librarymanagementsystem.service.ServiceFactory;
+import lk.ijse.librarymanagementsystem.service.impl.BookServiceImpl;
+import lk.ijse.librarymanagementsystem.service.impl.BorrowingDetailsServiceImpl;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -34,8 +34,8 @@ public class BookOBJformController implements Initializable {
     @FXML
     private Label titleField;
     public static int x;
-    BookService bookService = new BookService();
-    BorrowingDetailsService borrowingDetailsService = new BorrowingDetailsService();
+    BookServiceImpl bookServiceImpl = (BookServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BOOKService);
+    BorrowingDetailsServiceImpl borrowingDetailsServiceImpl = (BorrowingDetailsServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BORROWINGDETAILService);
     public  static ArrayList<BookDTO> allBooks = null;
     String status ;
     int id;
@@ -47,8 +47,8 @@ public class BookOBJformController implements Initializable {
         LocalDate now = LocalDate.now();
         LocalDate localDate = now.plusDays(10);
         String dueDate = String.valueOf(localDate);
-        boolean b = bookService.updateBookStatus(id, status);
-        boolean b1 = borrowingDetailsService.saveBorrowingDetails(new BorrowingDetailDTO(0, bdate, dueDate,"Not Returned", userID, id));
+        boolean b = bookServiceImpl.updateBookStatus(id, status);
+        boolean b1 = borrowingDetailsServiceImpl.saveBorrowingDetails(new BorrowingDetailDTO(0, bdate, dueDate,"Not Returned", userID, id));
         if (b1){
             new Alert(Alert.AlertType.INFORMATION,"Book booked!!").show();
         }

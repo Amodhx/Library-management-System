@@ -15,11 +15,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import lk.ijse.librarymanagementsystem.dto.tm.TransactionTM;
 import lk.ijse.librarymanagementsystem.entity.BorrowingDetails;
-import lk.ijse.librarymanagementsystem.service.BorrowingDetailsService;
+import lk.ijse.librarymanagementsystem.service.ServiceFactory;
+import lk.ijse.librarymanagementsystem.service.impl.BorrowingDetailsServiceImpl;
 import lombok.SneakyThrows;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -48,7 +48,7 @@ public class transactionManageformController implements Initializable {
     private TableView<TransactionTM> table;
     @FXML
     private TableColumn<TransactionTM, JFXButton> returncolumn;
-    BorrowingDetailsService borrowingDetailsService = new BorrowingDetailsService();
+    BorrowingDetailsServiceImpl borrowingDetailsServiceImpl = (BorrowingDetailsServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BORROWINGDETAILService);
 
     @SneakyThrows
     @FXML
@@ -67,7 +67,7 @@ public class transactionManageformController implements Initializable {
     }
 
     private void loadValues() {
-        List<BorrowingDetails> details = borrowingDetailsService.getDetails(id);
+        List<BorrowingDetails> details = borrowingDetailsServiceImpl.getDetails(id);
         ObservableList<TransactionTM> observableList = FXCollections.observableArrayList();
         for (BorrowingDetails b : details){
             if (!b.getStatus().equals("Returned")) {
@@ -80,8 +80,8 @@ public class transactionManageformController implements Initializable {
             int id = observableList.get(i).getTransID();
             observableList.get(i).getReturnBtn().setStyle("-fx-background-color: blue; -fx-text-fill: white");
             observableList.get(i).getReturnBtn().setOnAction(event -> {
-                borrowingDetailsService.updateDueTransaction(id);
-                boolean b = borrowingDetailsService.updateStatus(id);
+                borrowingDetailsServiceImpl.updateDueTransaction(id);
+                boolean b = borrowingDetailsServiceImpl.updateStatus(id);
                 if (b){
                     new Alert(Alert.AlertType.INFORMATION,"Book returned!").show();
                 }else {

@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.librarymanagementsystem.dto.BookDTO;
 import lk.ijse.librarymanagementsystem.dto.tm.BooksTM;
-import lk.ijse.librarymanagementsystem.service.BookService;
+import lk.ijse.librarymanagementsystem.service.impl.BookServiceImpl;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class BooksManageformController implements Initializable {
     @FXML
     private TableColumn<BooksTM, JFXButton> updatecolumn;
 
-    BookService bookService = new BookService();
+    BookServiceImpl bookServiceImpl = new BookServiceImpl();
 
     @SneakyThrows
     @FXML
@@ -70,7 +70,7 @@ public class BooksManageformController implements Initializable {
 
     private void loadValues() {
         ObservableList<BooksTM> observableList = FXCollections.observableArrayList();
-        for (BookDTO b : bookService.getAllBooks()) {
+        for (BookDTO b : bookServiceImpl.getAllBooks()) {
             observableList.add(new BooksTM(String.valueOf(b.getId()),b.getTitle(),b.getAuthor(),b.getGenre(),b.getStatus(),new JFXButton("Update"),new JFXButton("Delete")));
         }
         table.setItems(observableList);
@@ -79,7 +79,7 @@ public class BooksManageformController implements Initializable {
             observableList.get(i).getUpdate().setStyle("-fx-background-color: rgba(124, 1, 1, 1);-fx-text-fill: White;");
             observableList.get(i).getDelete().setStyle("-fx-background-color: rgba(0, 40, 118, 1);-fx-text-fill: White;");
             observableList.get(i).getDelete().setOnAction(event -> {
-                boolean b = bookService.deleteBook(id);
+                boolean b = bookServiceImpl.deleteBook(id);
                 ancpane.getChildren().clear();
                 try {
                     ancpane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/admin/books.fxml")));

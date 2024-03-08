@@ -9,9 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lk.ijse.librarymanagementsystem.dto.AdminDTO;
 import lk.ijse.librarymanagementsystem.dto.UserDTO;
-import lk.ijse.librarymanagementsystem.entity.Admin;
-import lk.ijse.librarymanagementsystem.entity.User;
-import lk.ijse.librarymanagementsystem.service.LogginService;
+import lk.ijse.librarymanagementsystem.service.ServiceFactory;
+import lk.ijse.librarymanagementsystem.service.impl.LogginServiceImpl;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -34,7 +33,7 @@ public class passwordCHangeController implements Initializable {
     @FXML
     private TextField usernameField;
 
-    LogginService logginService = new LogginService();
+    LogginServiceImpl logginServiceImpl = (LogginServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.LOGGINService);
 
     @FXML
     void onSaveClick(ActionEvent event) {
@@ -42,7 +41,7 @@ public class passwordCHangeController implements Initializable {
             admin.setUsername(usernameField.getText());
             admin.setPassword(passwordField.getText());
             admin.setEmail(emailField.getText());
-            boolean b = logginService.updateAdmin(admin);
+            boolean b = logginServiceImpl.updateAdmin(admin);
             if (b){
                 new Alert(Alert.AlertType.INFORMATION,"Done").show();
                 oncanselClick(event);
@@ -54,7 +53,7 @@ public class passwordCHangeController implements Initializable {
             user.setUsername(usernameField.getText());
             user.setPassword(passwordField.getText());
             user.setEmail(emailField.getText());
-            boolean b = logginService.updateUser(user);
+            boolean b = logginServiceImpl.updateUser(user);
             if (b){
                 new Alert(Alert.AlertType.INFORMATION,"Done").show();
                 oncanselClick(event);

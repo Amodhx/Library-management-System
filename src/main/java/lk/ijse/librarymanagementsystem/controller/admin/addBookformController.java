@@ -17,12 +17,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lk.ijse.librarymanagementsystem.dto.BookDTO;
-import lk.ijse.librarymanagementsystem.service.BookService;
+import lk.ijse.librarymanagementsystem.service.impl.BookServiceImpl;
 import lombok.SneakyThrows;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class addBookformController implements Initializable {
@@ -44,7 +43,7 @@ public class addBookformController implements Initializable {
     private JFXComboBox<String> selectGenreCombo;
     String imagePath = null;
 
-    BookService bookService = new BookService();
+    BookServiceImpl bookServiceImpl = new BookServiceImpl();
 
     @FXML
     void canselClick(ActionEvent event) {
@@ -70,7 +69,7 @@ public class addBookformController implements Initializable {
     @SneakyThrows
     @FXML
     void onSaveClick(ActionEvent event) {
-        boolean b = bookService.saveBook(new BookDTO(0, bookTitleField.getText(),
+        boolean b = bookServiceImpl.saveBook(new BookDTO(0, bookTitleField.getText(),
                 authorNamefield.getText(), selectGenreCombo.getValue(), "Available", imagePath));
         if (b){
             closeUI();

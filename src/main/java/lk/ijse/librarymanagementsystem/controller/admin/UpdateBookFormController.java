@@ -9,12 +9,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import lk.ijse.librarymanagementsystem.dto.BookDTO;
-import lk.ijse.librarymanagementsystem.service.BookService;
+import lk.ijse.librarymanagementsystem.service.impl.BookServiceImpl;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Stack;
 
 public class UpdateBookFormController implements Initializable {
     public static int bid;
@@ -33,7 +31,6 @@ public class UpdateBookFormController implements Initializable {
 
     @FXML
     private JFXComboBox<String> selectGenreCombo;
-    BookService bookService = new BookService();
 
     @FXML
     void canselClick(ActionEvent event) {

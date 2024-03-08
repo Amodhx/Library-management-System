@@ -11,7 +11,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.layout.GridPane;
 import lk.ijse.librarymanagementsystem.dto.BookDTO;
-import lk.ijse.librarymanagementsystem.service.BookService;
+import lk.ijse.librarymanagementsystem.service.ServiceFactory;
+import lk.ijse.librarymanagementsystem.service.impl.BookServiceImpl;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,7 +25,7 @@ public class userMailFormController implements Initializable {
     @FXML
     private GridPane gridpane;
 
-    BookService bookService = new BookService();
+    BookServiceImpl bookServiceImpl = (BookServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BOOKService);
     @FXML
     private JFXComboBox<String> combo;
 
@@ -32,7 +33,7 @@ public class userMailFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         combo.setValue("");
-        setGripPane(bookService.getAllBooks());
+        setGripPane(bookServiceImpl.getAllBooks());
         comboSetItem();
 
     }
@@ -46,9 +47,9 @@ public class userMailFormController implements Initializable {
     void selectinggenreCombo(ActionEvent event) {
         String value = combo.getValue();
         if (value.equals("All")){
-            setGripPane(bookService.getAllBooks());
+            setGripPane(bookServiceImpl.getAllBooks());
         }else {
-            setGripPane(bookService.getBooksFilterWithGenre(value));
+            setGripPane(bookServiceImpl.getBooksFilterWithGenre(value));
         }
     }
 

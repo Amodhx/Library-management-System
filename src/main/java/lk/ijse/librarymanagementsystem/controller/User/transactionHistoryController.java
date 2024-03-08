@@ -10,12 +10,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.librarymanagementsystem.dto.tm.TransactionTM;
 import lk.ijse.librarymanagementsystem.entity.BorrowingDetails;
-import lk.ijse.librarymanagementsystem.service.BorrowingDetailsService;
+import lk.ijse.librarymanagementsystem.service.ServiceFactory;
+import lk.ijse.librarymanagementsystem.service.impl.BorrowingDetailsServiceImpl;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class transactionHistoryController implements Initializable {
@@ -38,7 +37,7 @@ public class transactionHistoryController implements Initializable {
     @FXML
     private TableColumn<TransactionTM, String> titlecolumn;
     public static int id;
-    BorrowingDetailsService borrowingDetailsService = new BorrowingDetailsService();
+    BorrowingDetailsServiceImpl borrowingDetailsServiceImpl = (BorrowingDetailsServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BORROWINGDETAILService);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,7 +46,7 @@ public class transactionHistoryController implements Initializable {
     }
 
     private void loadValues() {
-        List<BorrowingDetails> details = borrowingDetailsService.getDetails(id);
+        List<BorrowingDetails> details = borrowingDetailsServiceImpl.getDetails(id);
         ObservableList<TransactionTM> observableList = FXCollections.observableArrayList();
         for (BorrowingDetails b : details){
             if (b.getStatus().equals("Returned")) {

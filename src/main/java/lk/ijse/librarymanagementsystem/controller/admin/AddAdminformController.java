@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lk.ijse.librarymanagementsystem.dto.AdminDTO;
 import lk.ijse.librarymanagementsystem.dto.UserDTO;
-import lk.ijse.librarymanagementsystem.service.LogginService;
+import lk.ijse.librarymanagementsystem.service.impl.LogginServiceImpl;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,7 +36,7 @@ public class AddAdminformController implements Initializable {
     private Label mainLabel;
 
 
-    LogginService logginService = new LogginService();
+    LogginServiceImpl logginServiceImpl = new LogginServiceImpl();
 
     @FXML
     void onSaveClick(ActionEvent event) {
@@ -45,7 +45,7 @@ public class AddAdminformController implements Initializable {
         String emailfieldText = emailfield.getText();
         if (accounttypecombo.getValue() != null) {
             if (accounttypecombo.getValue().equals("Admin")) {
-                boolean b = logginService.saveAdmin(new AdminDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
+                boolean b = logginServiceImpl.saveAdmin(new AdminDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
                 if (b) {
                     oncanselClick(event);
                 } else {
@@ -53,7 +53,7 @@ public class AddAdminformController implements Initializable {
                     oncanselClick(event);
                 }
             } else if (accounttypecombo.getValue().equals("User")) {
-                boolean b = logginService.saveUser(new UserDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
+                boolean b = logginServiceImpl.saveUser(new UserDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
                 if (b) {
                     oncanselClick(event);
                 } else {
@@ -61,7 +61,7 @@ public class AddAdminformController implements Initializable {
                     oncanselClick(event);
                 }
             } else {
-                boolean b = logginService.saveUser(new UserDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
+                boolean b = logginServiceImpl.saveUser(new UserDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
                 if (b) {
                     oncanselClick(event);
                 } else {
@@ -70,7 +70,7 @@ public class AddAdminformController implements Initializable {
                 }
             }
         }else {
-            boolean b = logginService.saveUser(new UserDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
+            boolean b = logginServiceImpl.saveUser(new UserDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
             if (b) {
                 oncanselClick(event);
             } else {

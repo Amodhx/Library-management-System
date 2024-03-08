@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.librarymanagementsystem.dto.ShopDTO;
-import lk.ijse.librarymanagementsystem.service.ShopService;
+import lk.ijse.librarymanagementsystem.service.impl.ShopServiceImpl;
 import lombok.SneakyThrows;
 
 public class addShopformController {
@@ -30,7 +30,7 @@ public class addShopformController {
     private TextField shopnameField;
     public static AnchorPane anchorPane;
 
-    ShopService service = new ShopService();
+    ShopServiceImpl service = new ShopServiceImpl();
 
     @FXML
     void canselClick(ActionEvent event) {
