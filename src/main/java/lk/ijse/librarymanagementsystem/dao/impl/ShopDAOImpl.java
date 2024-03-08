@@ -1,7 +1,8 @@
-package lk.ijse.librarymanagementsystem.dao;
+package lk.ijse.librarymanagementsystem.dao.impl;
 
 import javafx.scene.control.Alert;
 import lk.ijse.librarymanagementsystem.config.FactoryConfiguration;
+import lk.ijse.librarymanagementsystem.dao.ShopDAO;
 import lk.ijse.librarymanagementsystem.entity.Branches;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -9,7 +10,9 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class ShopDAOImpl {
+public class ShopDAOImpl implements ShopDAO {
+
+    @Override
     public boolean deleteShop(int id){
         Session session = null;
         int x = 0 ;
@@ -28,7 +31,9 @@ public class ShopDAOImpl {
         }
         return x > 0;
     }
-    public List<Branches> getAllShops(){
+
+    @Override
+    public List<Branches> getAll(){
         Session session = null;
         List<Branches> list = null;
         try {
@@ -41,7 +46,9 @@ public class ShopDAOImpl {
         }
         return list;
     }
-    public boolean saveShop(Branches branches){
+
+    @Override
+    public boolean saveAll(Branches branches){
         Session session = null;
         int x = 0 ;
         try {
