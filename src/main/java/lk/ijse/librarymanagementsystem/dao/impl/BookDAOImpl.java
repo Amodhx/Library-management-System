@@ -1,7 +1,8 @@
-package lk.ijse.librarymanagementsystem.dao;
+package lk.ijse.librarymanagementsystem.dao.impl;
 
 import javafx.scene.control.Alert;
 import lk.ijse.librarymanagementsystem.config.FactoryConfiguration;
+import lk.ijse.librarymanagementsystem.dao.BookDAO;
 import lk.ijse.librarymanagementsystem.entity.Book;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,8 +11,10 @@ import org.hibernate.query.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDAOImpl {
-    public boolean saveBook(Book book){
+public class BookDAOImpl implements BookDAO {
+
+    @Override
+    public boolean saveAll(Book book){
         Session session = null;
         int x = 0 ;
         try {
@@ -26,7 +29,9 @@ public class BookDAOImpl {
         }
         return x > 0 ;
     }
-    public List<Book> getAllBooks(){
+
+    @Override
+    public List<Book> getAll(){
         Session session = null;
         List resultList = null;
         try {
@@ -40,6 +45,7 @@ public class BookDAOImpl {
         return resultList;
     }
 
+    @Override
     public List<Book> getBooksFilterWithGenre(String genre) {
         Session session = null;
         List<Book> list = null;
@@ -56,6 +62,7 @@ public class BookDAOImpl {
         return list;
     }
 
+    @Override
     public boolean updateBook(int id , String status) {
         Session session = null;
         int x = 0 ;
@@ -75,6 +82,7 @@ public class BookDAOImpl {
         return x > 0 ;
     }
 
+    @Override
     public Book getBookByID(int id) {
         Session session = null;
         Book book = new Book();
@@ -97,6 +105,7 @@ public class BookDAOImpl {
         return book;
     }
 
+    @Override
     public boolean deleteBook(String id) {
         Session session = null;
         int x = 0 ;
@@ -115,6 +124,7 @@ public class BookDAOImpl {
         return x > 0 ;
     }
 
+    @Override
     public boolean Update(Book book) {
         Session session = null;
         int x = 0 ;
