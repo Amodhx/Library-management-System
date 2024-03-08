@@ -1,7 +1,8 @@
-package lk.ijse.librarymanagementsystem.dao;
+package lk.ijse.librarymanagementsystem.dao.impl;
 
 import javafx.scene.control.Alert;
 import lk.ijse.librarymanagementsystem.config.FactoryConfiguration;
+import lk.ijse.librarymanagementsystem.dao.AdminDAO;
 import lk.ijse.librarymanagementsystem.entity.Admin;
 import lk.ijse.librarymanagementsystem.entity.User;
 import org.hibernate.Session;
@@ -9,8 +10,10 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class AdminDAOImpl {
-    public List<Admin> getAllAdmin(){
+public class AdminDAOImpl implements AdminDAO {
+
+    @Override
+    public List<Admin> getAll(){
         Session session = null;
         List<Admin> resultList = null;
         try {
@@ -24,6 +27,7 @@ public class AdminDAOImpl {
         }
     }
 
+    @Override
     public boolean updateAdmin(Admin admin){
         Session session = null;
         int x = 0 ;
@@ -40,7 +44,9 @@ public class AdminDAOImpl {
         }
         return x > 0 ;
     }
-    public boolean saveAdmin(Admin admin) {
+
+    @Override
+    public boolean saveAll(Admin admin) {
         Session session = null;
         int x = 0;
         try {
