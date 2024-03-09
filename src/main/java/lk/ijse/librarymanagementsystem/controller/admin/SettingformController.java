@@ -42,9 +42,13 @@ public class SettingformController {
         stage.show();
     }
 
+    @SneakyThrows
     @FXML
     void userBlackListbtnClick(ActionEvent event) {
-
+        Stage stage = new Stage();
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/admin/blacklistUsers.fxml"))));
+        stage.setResizable(false);
+        stage.show();
     }
 
 }
