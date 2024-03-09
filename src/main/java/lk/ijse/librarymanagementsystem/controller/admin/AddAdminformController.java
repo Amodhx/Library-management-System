@@ -16,6 +16,7 @@ import lk.ijse.librarymanagementsystem.service.impl.LogginServiceImpl;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class AddAdminformController implements Initializable {
 
@@ -43,22 +44,32 @@ public class AddAdminformController implements Initializable {
         String usernamefieldText = usernamefield.getText();
         String passwordfiledText = passwordfiled.getText();
         String emailfieldText = emailfield.getText();
-        if (accounttypecombo.getValue() != null) {
-            if (accounttypecombo.getValue().equals("Admin")) {
-                boolean b = logginServiceImpl.saveAdmin(new AdminDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
-                if (b) {
-                    oncanselClick(event);
+        if (checkFields(usernamefieldText,passwordfiledText,emailfieldText)) {
+            if (accounttypecombo.getValue() != null) {
+                if (accounttypecombo.getValue().equals("Admin")) {
+                    boolean b = logginServiceImpl.saveAdmin(new AdminDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
+                    if (b) {
+                        oncanselClick(event);
+                    } else {
+                        new Alert(Alert.AlertType.ERROR).show();
+                        oncanselClick(event);
+                    }
+                } else if (accounttypecombo.getValue().equals("User")) {
+                    boolean b = logginServiceImpl.saveUser(new UserDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
+                    if (b) {
+                        oncanselClick(event);
+                    } else {
+                        new Alert(Alert.AlertType.ERROR).show();
+                        oncanselClick(event);
+                    }
                 } else {
-                    new Alert(Alert.AlertType.ERROR).show();
-                    oncanselClick(event);
-                }
-            } else if (accounttypecombo.getValue().equals("User")) {
-                boolean b = logginServiceImpl.saveUser(new UserDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
-                if (b) {
-                    oncanselClick(event);
-                } else {
-                    new Alert(Alert.AlertType.ERROR).show();
-                    oncanselClick(event);
+                    boolean b = logginServiceImpl.saveUser(new UserDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
+                    if (b) {
+                        oncanselClick(event);
+                    } else {
+                        new Alert(Alert.AlertType.ERROR).show();
+                        oncanselClick(event);
+                    }
                 }
             } else {
                 boolean b = logginServiceImpl.saveUser(new UserDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
@@ -70,13 +81,19 @@ public class AddAdminformController implements Initializable {
                 }
             }
         }else {
-            boolean b = logginServiceImpl.saveUser(new UserDTO(0, usernamefieldText, passwordfiledText, emailfieldText));
-            if (b) {
-                oncanselClick(event);
-            } else {
-                new Alert(Alert.AlertType.ERROR).show();
-                oncanselClick(event);
+            new Alert(Alert.AlertType.ERROR).show();
+        }
+    }
+
+    private boolean checkFields(String usernamefieldText, String passwordfiledText, String emailfieldText) {
+        if (usernamefieldText != null && passwordfiledText != null && emailfieldText != null){
+            if (Pattern.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}\n",emailfieldText)){
+                return true;
+            }else {
+                return false;
             }
+        }else {
+            return false;
         }
     }
 

@@ -12,6 +12,8 @@ import lk.ijse.librarymanagementsystem.dto.ShopDTO;
 import lk.ijse.librarymanagementsystem.service.impl.ShopServiceImpl;
 import lombok.SneakyThrows;
 
+import java.util.regex.Pattern;
+
 public class addShopformController {
 
     @FXML
@@ -41,13 +43,13 @@ public class addShopformController {
     @SneakyThrows
     @FXML
     void onSaveClick(ActionEvent event) {
-        if (service.saveShop(new ShopDTO(0,shopnameField.getText(),cityfield.getText(),addressfield.getText(),postalcodefield.getText()))){
+        if (service.saveShop(new ShopDTO(0, shopnameField.getText(), cityfield.getText(), addressfield.getText(), postalcodefield.getText()))) {
             anchorPane.getChildren().clear();
             anchorPane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/admin/shops.fxml")));
             canselClick(event);
-        }else {
+        } else {
             canselClick(event);
-            new Alert(Alert.AlertType.ERROR,"Cant save").show();
+            new Alert(Alert.AlertType.ERROR, "Cant save").show();
         }
     }
 
