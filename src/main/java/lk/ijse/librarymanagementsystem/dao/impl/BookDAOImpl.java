@@ -140,4 +140,18 @@ public class BookDAOImpl implements BookDAO {
         }
         return true;
     }
+    public Long getBookCount(){
+        Session session = null;
+        Long count = null;
+        try {
+            session = FactoryConfiguration.getFactoryConfiguration().getSession();
+            Query<Long> query = session.createQuery("select count(id) from Book", Long.class);
+            count = query.uniqueResult();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return count;
+    }
 }

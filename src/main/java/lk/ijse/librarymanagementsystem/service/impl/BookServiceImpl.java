@@ -7,6 +7,7 @@ import lk.ijse.librarymanagementsystem.entity.Book;
 import lk.ijse.librarymanagementsystem.service.BookService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BookServiceImpl implements BookService {
@@ -57,5 +58,11 @@ public class BookServiceImpl implements BookService {
     @Override
     public boolean updateBook(BookDTO bookDTO) {
         return bookDAO.Update(new Book(bookDTO.getId(),bookDTO.getTitle(),bookDTO.getAuthor(),bookDTO.getGenre(),bookDTO.getStatus(),bookDTO.getUrl(),new ArrayList<>()));
+    }
+
+    @Override
+    public Long getBookCount(){
+        Long bookCount = bookDAO.getBookCount();
+        return bookCount;
     }
 }
