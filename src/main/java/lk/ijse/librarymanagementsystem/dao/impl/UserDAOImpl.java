@@ -81,4 +81,19 @@ public class UserDAOImpl implements UserDAO {
         }
         return x > 0 ;
     }
+    @Override
+    public Long getUserCount(){
+        Session session = null;
+        Long count = null;
+        try {
+            session = FactoryConfiguration.getFactoryConfiguration().getSession();
+            Query<Long> query = session.createQuery("select count(id) from User", Long.class);
+            count = query.uniqueResult();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            session.close();
+        }
+        return count;
+    }
 }

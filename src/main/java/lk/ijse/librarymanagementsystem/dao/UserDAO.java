@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface UserDAO extends CrudDAO<User> {
      User getUserByID(int id);
-
+      Long getUserCount();
 
      boolean updateUser(User user);
 }
