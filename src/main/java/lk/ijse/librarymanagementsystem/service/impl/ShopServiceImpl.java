@@ -32,4 +32,9 @@ public class ShopServiceImpl implements ShopService {
     public boolean saveShop(ShopDTO shopDTO){
         return shopDAO.saveAll(new Branches(shopDTO.getId(), shopDTO.getName(), shopDTO.getCity(), shopDTO.getAddress(), shopDTO.getPostalCode()));
     }
+
+    @Override
+    public Long getShopCount(){
+        return shopDAO.getShopCount();
+    }
 }
