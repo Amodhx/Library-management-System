@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface LogginService extends AllService {
+      Long getUserCount();
      User getUserById(int id);
 
      ArrayList<UserDTO> getAllUsers();
