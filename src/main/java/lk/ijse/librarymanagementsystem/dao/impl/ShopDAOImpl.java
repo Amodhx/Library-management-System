@@ -63,4 +63,21 @@ public class ShopDAOImpl implements ShopDAO {
         }
         return x > 0 ;
     }
+
+    @Override
+    public Long getShopCount(){
+        Session session = null;
+        Long x = null;
+        try {
+            session = FactoryConfiguration.getFactoryConfiguration().getSession();
+            Query<Long> query = session.createQuery("select count(id) from Branches", Long.class);
+            x = query.uniqueResult();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR).show();
+        }finally {
+            session.close();
+        }
+
+        return x;
+    }
 }
