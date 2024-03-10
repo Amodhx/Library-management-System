@@ -60,4 +60,9 @@ public class LogginServiceImpl implements LogginService {
         return userDAO.updateUser(new User(userDTO.getId(),userDTO.getUsername(), userDTO.getPassword(), userDTO.getEmail(),new ArrayList<>()));
 
     }
+
+    @Override
+    public Long getUserCount(){
+        return userDAO.getUserCount();
+    }
 }
