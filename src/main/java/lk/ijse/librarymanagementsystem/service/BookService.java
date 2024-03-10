@@ -17,4 +17,5 @@ public interface BookService extends AllService{
      boolean deleteBook(String id);
 
      boolean updateBook(BookDTO bookDTO);
+      Long getBookCount();
 }
