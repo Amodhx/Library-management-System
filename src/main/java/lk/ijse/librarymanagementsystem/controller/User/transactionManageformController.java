@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.librarymanagementsystem.dto.tm.TransactionTM;
 import lk.ijse.librarymanagementsystem.entity.BorrowingDetails;
@@ -20,12 +21,15 @@ import lk.ijse.librarymanagementsystem.service.ServiceFactory;
 import lk.ijse.librarymanagementsystem.service.impl.BorrowingDetailsServiceImpl;
 import lombok.SneakyThrows;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class transactionManageformController implements Initializable {
     public static int id;
+    @FXML
+    private AnchorPane pane;
 
 
     @FXML
@@ -88,6 +92,12 @@ public class transactionManageformController implements Initializable {
                 boolean bb = bookService.updateBookStatus(bookId,"Available");
                 if (bb){
                     new Alert(Alert.AlertType.INFORMATION,"Book returned!").show();
+                    pane.getChildren().clear();
+                    try {
+                        pane.getChildren().add(FXMLLoader.load(getClass().getResource("/view/user/transactionform.fxml")));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }else {
                     new Alert(Alert.AlertType.ERROR).show();
                 }
