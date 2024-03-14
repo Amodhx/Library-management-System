@@ -14,6 +14,7 @@ public class BooksTM {
     private String author;
     private String genre;
     private String status;
+    private String url;
     private JFXButton update;
     private JFXButton delete;
 }
