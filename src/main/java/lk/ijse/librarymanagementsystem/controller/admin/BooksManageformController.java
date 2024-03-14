@@ -71,7 +71,7 @@ public class BooksManageformController implements Initializable {
     private void loadValues() {
         ObservableList<BooksTM> observableList = FXCollections.observableArrayList();
         for (BookDTO b : bookServiceImpl.getAllBooks()) {
-            observableList.add(new BooksTM(String.valueOf(b.getId()),b.getTitle(),b.getAuthor(),b.getGenre(),b.getStatus(),new JFXButton("Update"),new JFXButton("Delete")));
+            observableList.add(new BooksTM(String.valueOf(b.getId()),b.getTitle(),b.getAuthor(),b.getGenre(),b.getStatus(),b.getUrl(),new JFXButton("Update"),new JFXButton("Delete")));
         }
         table.setItems(observableList);
         for (int i = 0; i < observableList.size(); i++) {
@@ -92,12 +92,16 @@ public class BooksManageformController implements Initializable {
             String author = observableList.get(i).getAuthor();
             String genre = observableList.get(i).getGenre();
             String status = observableList.get(i).getStatus();
+            String url = observableList.get(i).getUrl();
             observableList.get(i).getUpdate().setOnAction(event -> {
                 Stage stage = new Stage();
                 UpdateBookFormController.bid = Integer.parseInt(id1);
                 UpdateBookFormController.booktitle = title;
                 UpdateBookFormController.author = author;
                 UpdateBookFormController.genrer = genre;
+                UpdateBookFormController.url =url;
+                UpdateBookFormController.status = status;
+                UpdateBookFormController.pane =ancpane;
                 try {
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/admin/UpdateBook.fxml"))));
                 } catch (IOException e) {
