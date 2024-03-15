@@ -56,6 +56,7 @@ public class transactionManageformController implements Initializable {
     private TableColumn<TransactionTM, JFXButton> returncolumn;
     BorrowingDetailsServiceImpl borrowingDetailsServiceImpl = (BorrowingDetailsServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BORROWINGDETAILService);
 
+    UserBookDetail userBookDetail = new UserBookDetail();
     BookService bookService = (BookService) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BOOKService);
     @SneakyThrows
     @FXML
@@ -88,10 +89,8 @@ public class transactionManageformController implements Initializable {
             int bookId = observableList.get(i).getBookId();
             observableList.get(i).getReturnBtn().setStyle("-fx-background-color: blue; -fx-text-fill: white");
             observableList.get(i).getReturnBtn().setOnAction(event -> {
-                boolean b1 = borrowingDetailsServiceImpl.updateDueTransaction(id);
-                boolean b = borrowingDetailsServiceImpl.updateStatus(id);
-                boolean bb = bookService.updateBookStatus(bookId,"Available");
-                if (bb){
+                boolean b = userBookDetail.bookReturn(id, bookId, "Available");
+                if (b){
                     new Alert(Alert.AlertType.INFORMATION,"Book returned!").show();
                     pane.getChildren().clear();
                     try {
