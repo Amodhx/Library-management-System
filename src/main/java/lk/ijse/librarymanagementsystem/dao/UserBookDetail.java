@@ -40,4 +40,31 @@ public class UserBookDetail {
         }
         return x > 0 ;
     }
+    public boolean bookReturn(int id, int bookId, String available){
+        Session session =null;
+        int x =0 ;
+        try {
+            session = FactoryConfiguration.getFactoryConfiguration().getSession();
+            Transaction transaction = session.beginTransaction();
+            Query query = session.createQuery("UPDATE BorrowingDetails b set dueDate = :Date where id = :ID");
+            query.setParameter("Date",String.valueOf(LocalDate.now()));
+            query.setParameter("ID",id);
+            x = query.executeUpdate();
+            Query query1 = session.createQuery("update BorrowingDetails b set status = :Status where id = :ID");
+            query1.setParameter("Status","Returned");
+            query1.setParameter("ID",id);
+            query1.executeUpdate();
+            Query query2 = session.createQuery("update Book set status = :Sta where id = :ID");
+            query2.setParameter("Sta",available);
+            query2.setParameter("ID",id);
+            query2.executeUpdate();
+            x = 1 ;
+            transaction.commit();
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR).show();
+        }finally {
+            session.close();
+        }
+        return x > 0 ;
+    }
 }
