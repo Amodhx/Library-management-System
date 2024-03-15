@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.librarymanagementsystem.dao.UserBookDetail;
 import lk.ijse.librarymanagementsystem.dto.BookDTO;
 import lk.ijse.librarymanagementsystem.dto.BorrowingDetailDTO;
 import lk.ijse.librarymanagementsystem.service.ServiceFactory;
@@ -34,11 +35,11 @@ public class BookOBJformController implements Initializable {
     @FXML
     private Label titleField;
     public static int x;
-    BookServiceImpl bookServiceImpl = (BookServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BOOKService);
-    BorrowingDetailsServiceImpl borrowingDetailsServiceImpl = (BorrowingDetailsServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BORROWINGDETAILService);
-    public  static ArrayList<BookDTO> allBooks = null;
+   public  static ArrayList<BookDTO> allBooks = null;
     String status ;
     int id;
+
+    UserBookDetail userBookDetail = new UserBookDetail();
 
     @FXML
     void onAddIconClick(MouseEvent event) {
@@ -47,9 +48,8 @@ public class BookOBJformController implements Initializable {
         LocalDate now = LocalDate.now();
         LocalDate localDate = now.plusDays(10);
         String dueDate = String.valueOf(localDate);
-        boolean b = bookServiceImpl.updateBookStatus(id, status);
-        boolean b1 = borrowingDetailsServiceImpl.saveBorrowingDetails(new BorrowingDetailDTO(0, bdate, dueDate,"Not Returned", userID, id));
-        if (b1){
+        boolean b2 = userBookDetail.bookBook(id,status,new BorrowingDetailDTO(0, bdate, dueDate,"Not Returned", userID, id));
+         if (b2){
             new Alert(Alert.AlertType.INFORMATION,"Book booked!!").show();
         }
     }
