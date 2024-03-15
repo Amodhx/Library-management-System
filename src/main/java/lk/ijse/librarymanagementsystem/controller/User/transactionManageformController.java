@@ -14,6 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.librarymanagementsystem.dao.UserBookDetail;
 import lk.ijse.librarymanagementsystem.dto.tm.TransactionTM;
 import lk.ijse.librarymanagementsystem.entity.BorrowingDetails;
 import lk.ijse.librarymanagementsystem.service.BookService;
@@ -54,8 +55,8 @@ public class transactionManageformController implements Initializable {
     @FXML
     private TableColumn<TransactionTM, JFXButton> returncolumn;
     BorrowingDetailsServiceImpl borrowingDetailsServiceImpl = (BorrowingDetailsServiceImpl) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BORROWINGDETAILService);
-    BookService bookService = (BookService) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BOOKService);
 
+    BookService bookService = (BookService) ServiceFactory.getServiceFactory().getService(ServiceFactory.ServiceTypes.BOOKService);
     @SneakyThrows
     @FXML
     void transHistoryButton(ActionEvent event) {
@@ -87,7 +88,7 @@ public class transactionManageformController implements Initializable {
             int bookId = observableList.get(i).getBookId();
             observableList.get(i).getReturnBtn().setStyle("-fx-background-color: blue; -fx-text-fill: white");
             observableList.get(i).getReturnBtn().setOnAction(event -> {
-                borrowingDetailsServiceImpl.updateDueTransaction(id);
+                boolean b1 = borrowingDetailsServiceImpl.updateDueTransaction(id);
                 boolean b = borrowingDetailsServiceImpl.updateStatus(id);
                 boolean bb = bookService.updateBookStatus(bookId,"Available");
                 if (bb){
