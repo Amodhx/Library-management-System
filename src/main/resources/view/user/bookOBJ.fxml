@@ -43,7 +43,7 @@
       </Label>
       <ImageView fx:id="addIcon" fitHeight="43.0" fitWidth="43.0" layoutX="983.0" layoutY="79.0" onMouseClicked="#onAddIconClick">
          <image>
-            <Image url="@../../assets/download%20(1).png" />
+            <Image url="@../../assets/download (1).png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />

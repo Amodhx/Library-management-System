@@ -85,7 +85,7 @@ public class LoginController implements Initializable {
                     transactionManageformController.id = u.getId();
                     stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/user/UserDashboard.fxml"))));
                 } catch (IOException e) {
-                     new Alert(Alert.AlertType.ERROR,"Cant load dashboard").show();
+                     e.printStackTrace();
                 }
                 stage.setResizable(false);
                 stage.show();
